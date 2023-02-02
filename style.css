@@ -127,3 +127,18 @@ body{
   color: white;
   background-color: white;
 }
+
+
+.upp-efter-klick {
+  display: block;
+  height: auto;
+  overflow: hidden;
+  transition: all 4s ease-in-out;
+}
+
+.visa-efter-start {
+  display: none;
+  height: auto;
+  overflow: hidden;
+  transition: all 4s ease-in-out;
+}
