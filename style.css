@@ -1,0 +1,129 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* overflow-y: hidden; */
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+}
+body{
+  background-color: #00539CFF;
+}
+
+.se-poäng-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-right: 15em;
+  padding-top: 3em;
+}
+
+
+.välkommen{
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2em;
+  background-color: #00539CFF;
+  color: white;
+}
+
+.välkommen h1{
+  padding-bottom: 1em;
+  font-size: 30px;
+}
+.välkommen h3{
+  font-size: 24px;
+}
+
+.vem-spelar label{
+  font-size: 26px;
+}
+
+.vem-spelar input{
+  padding: 0.5em 0.5em ;
+  font-size: 20px;
+}
+
+.vem-spelar button{
+  border: none;
+  padding: 1em;
+  font-size: 24px;
+  background-color: #EEA47FFF;
+  color: #00539CFF;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 1.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.vem-spelar{
+ display: flex;
+ flex-direction: column;
+ gap: 1em;
+ margin-bottom: 1em;
+}
+
+
+.hela-figuren {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  
+}
+
+.visa-efter-start{
+  /* visibility: hidden; */
+  color: white;
+}
+
+.se-poäng-knapp {
+	border: none;
+	padding: 1em;
+	font-size: 20px;
+	background-color: #EEA47FFF;
+	color: #00539CFF;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+.antal-gissningar{
+  padding-bottom: 2em;
+  font-size: 24px;
+}
+
+.hr-div{
+  border: 1px solid black;
+  
+  
+
+}
+
+.input-container-fel {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 1em;
+  font-size: 24px;
+}
+
+.input-container-rätt {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+  margin: 1em;
+  font-size: 24px;
+}
+
+
+.parts{
+  color: white;
+  background-color: white;
+}
