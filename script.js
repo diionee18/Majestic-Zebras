@@ -14,7 +14,8 @@ const parts = {
 
 // Här kan man sätta dem till none så att dem ej visas
 // och sedan så kan man använda if för att få fram dem.
-parts.partEtt.style.display = 'block'
+parts.partEtt.style.display = 'none'
+parts.partTvå.style.display = 'none'
 
 
 förstaFönstret.style.display = ''
@@ -32,8 +33,8 @@ spelaBtn.addEventListener('click', function(){
 
 
 function toggleSections() {
-  if (förstaFönstret.style.display === 'none') {
-    andraFönstret.style.display = ''
+  if (förstaFönstret.style.display === 'block') {
+    andraFönstret.style.display = 'none'
   } else {
     förstaFönstret.style.display = 'none'
     andraFönstret.style.display = 'block'
