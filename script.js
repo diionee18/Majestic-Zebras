@@ -16,7 +16,9 @@ const parts = {
 // och sedan så kan man använda if för att få fram dem.
 parts.partEtt.style.display = 'none'
 parts.partTvå.style.display = 'none'
-
+parts.partTre.style.display = 'none'
+parts.partFyra.style.display = 'none'
+parts.partFem.style.display = 'none'
 
 förstaFönstret.style.display = ''
 andraFönstret.style.display = 'none'
@@ -41,5 +43,63 @@ function toggleSections() {
   }
 }
 spelaBtn.addEventListener('click', toggleSections)
+
+
+
+
+//KOPIERAD KOD FRÅN AI!
+/*const secretWord = "javascript";
+const ul = document.querySelector(".ul-bokstäver-rätt");
+const mistakes = document.querySelector(".ul-fel-bokstäver");
+let remainingLetters = secretWord.length;
+
+for (const letter of secretWord) {
+  const li = document.createElement("li");
+  li.textContent = "_";
+  ul.appendChild(li);
+}
+
+document.addEventListener("keypress", (event) => {
+  const letter = event.key;
+  let letterFound = false;
+
+  for (let i = 0; i < secretWord.length; i++) {
+    if (secretWord[i] === letter) {
+      const li = ul.children[i];
+      li.textContent = letter;
+      letterFound = true;
+      remainingLetters--;
+    }
+  }
+*/
+  //Om bokstaven är fel 
+  //Då ska den skapa en div
+  //I diven ska den skriva ut en bokstav och sätta ut en del av hänga gubben
+
+
+  //MIN KOD TILL EN BÖRJAN 
+  const wronglettersword = []
+
+  if (!letterFound) {
+    const mistake = document.createElement("div");
+    mistake.textContent = letter;
+    
+    parts.forEach(partEtt, 0) => { 
+    const errors = wronglettersword 
+      
+    mistakes.appendChild(mistake);
+  }
+
+  if (remainingLetters === 0) {
+    alert("Congratulations! You have won the game.");
+  }
+  
+};
+
+
+//path Varje bilds del - så att man kan få så att om det blir rätt eller fel. 
+//Det handlar om att varje bild måste ha samma namn så att man kan göra en queryselector på allihopa! 
+//(Kolla upp hur man kan göra så att alla bilders namn blir lika och att man kan göra en foreach på denna som jag visar i koden uvanför.  )
+
 
 
