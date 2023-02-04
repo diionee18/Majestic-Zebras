@@ -6,6 +6,9 @@ const andraFönstret = document.querySelector(".visa-efter-start");
 const inputNamn = document.querySelector("#spelarens-namn");
 const spelaBtn = document.querySelector(".börja-spelet-knapp");
 const förstaFönstret = document.querySelector(".upp-efter-klick");
+const börjaOmBtn = document.querySelector('.reset-btn')
+
+börjaOmBtn.style.display ='none'
 
 const parts = {
   partEtt: document.querySelector(".part1"),
@@ -62,9 +65,10 @@ function generateKnapp() {
 
     button.addEventListener("click", (e) => {
       behandlaGuess(e.currentTarget.innerHTML);
+      alert(svar)
     });
     
-    window.addEventListener("keypress", (e) => {
+    window.addEventListener("keydown", (e) => {
       if (!svar) {
         return;
       }
@@ -90,11 +94,30 @@ function behandlaGuess(valdBokstav) {
 
   if (svar.indexOf(valdBokstav) >= 0) {
     gissatOrd();
+    CheckIfGameWon();
   } else if (svar.indexOf(valdBokstav) === -1){
     misstag++;
     uppdateraMisstag();
+    CheckIfGameLost();
   }
 }
+
+function CheckIfGameWon(){
+  if(ordStatus === svar){
+    börjaOmBtn.style.display= 'block'
+    document.querySelector('.input-container-rätt').innerHTML = 'Hurra!! Du vann!'
+    document.querySelector('.reset-btn').innerHTML = 'Spela igen';
+  }
+}
+
+
+function CheckIfGameLost(){
+  if(misstag === maxFel){
+    document.querySelector('.input-container-rätt').innerHTML = 'Du har förlorat, spela igen?' 
+    börjaOmBtn.style.display= 'block'
+  }
+}
+
 
 function gissatOrd() {
   ordStatus = svar
