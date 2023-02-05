@@ -65,7 +65,7 @@ function generateKnapp() {
 
     button.addEventListener("click", (e) => {
       behandlaGuess(e.currentTarget.innerHTML);
-      alert(svar)
+
     });
     
     window.addEventListener("keydown", (e) => {
@@ -99,7 +99,12 @@ function behandlaGuess(valdBokstav) {
     misstag++;
     uppdateraMisstag();
     CheckIfGameLost();
+    uppdateraFigur();
   }
+}
+
+function uppdateraFigur(){
+  document.getElementById('Hänga-gubbebild').src = './bilder/' + misstag + '.jpg' ;
 }
 
 function CheckIfGameWon(){
@@ -131,6 +136,12 @@ function uppdateraMisstag(){
   document.getElementById('misstag').innerHTML = misstag
 }
 
+function reset(){
+  misstag = 0;
+  gissat = [];
+  document.querySelector
+
+}
 
 document.querySelector(".max-fel").textContent = maxFel;
 

@@ -117,17 +117,12 @@ body{
 .input-container-rätt {
  display: flex;
  flex-direction: row;
+ flex-wrap: wrap ;
  justify-content: center;
   margin: 1em;
   font-size: 24px;
 }
 
-
-.parts{
-  
-  color: white;
-  background-color: white;
-}
 
 
 .upp-efter-klick {
@@ -211,4 +206,15 @@ background-color: red;
   color: #00539CFF;
   border-radius: 5px;
   font-size: 16px;
+}
+
+img{
+width: 150px;
+}
+
+.se-poäng-knapp2{
+  margin-top: 1em;
+  margin-left: 1em;
+  display: flex;
+  
 }
