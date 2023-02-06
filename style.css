@@ -217,3 +217,17 @@ transition: transform 0.3s ease-in-out;
   overflow: hidden;
   transition: all 4s ease-in-out;
 }
+
+
+ul.{
+  list-style-type: none;
+}
+
+
+.ul-bokstäver-rätt, .ul-fel-bokstäver{
+  display: flex;
+  flex-direction:row ;
+  gap: 1em;
+  list-style: none;
+  font-size: 30px;
+}
