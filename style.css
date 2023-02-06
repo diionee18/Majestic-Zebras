@@ -15,8 +15,23 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: end;
-  margin-right: 15em;
-  padding-top: 3em;
+  margin-right: 8em;
+  padding-top: 1em;
+}
+.se-poäng-knapp {
+	border: none;
+	padding: 0.5em;
+	font-size: 16px;
+	background-color: #EEA47FFF;
+	color: #00539CFF;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 1em;
+	margin-bottom: 0.5em;
+}
+.antal-gissningar{
+  padding-bottom: 2em;
+  font-size: 24px;
 }
 
 
@@ -83,22 +98,7 @@ body{
   color: white;
 }
 
-.se-poäng-knapp {
-	border: none;
-	padding: 1em;
-	font-size: 20px;
-	background-color: #EEA47FFF;
-	color: #00539CFF;
-	font-weight: bold;
-	cursor: pointer;
-	border-radius: 1em;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-.antal-gissningar{
-  padding-bottom: 2em;
-  font-size: 24px;
-}
+
 
 .hr-div{
   border: 1px solid black;
@@ -118,16 +118,12 @@ body{
 .input-container-rätt {
  display: flex;
  flex-direction: row;
+ flex-wrap: wrap ;
  justify-content: center;
   margin: 1em;
   font-size: 24px;
 }
 
-
-.parts{
-  color: white;
-  background-color: white;
-}
 
 
 .upp-efter-klick {
@@ -144,84 +140,82 @@ body{
   transition: all 4s ease-in-out;
 }
 
-.ul-fel-bokstäver {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+
+.ul{
+  list-style-type: none;
+}
+
+
+.ul-bokstäver-rätt, .ul-fel-bokstäver{
   display: flex;
-  flex-direction: column;
-  text-align: right;
-  }
+  flex-direction:row ;
+  gap: 1em;
+  list-style: none;
+  font-size: 30px;
+}
 
-  .ul-fel-bokstäver p {
-    margin: 0 0 5px;
-  }
-
-  .ul-fel-bokstäver span {
-    font-size: 24px;;
-  }
-
-  .word {
-    display: flex;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .letter {
-    border-bottom: 3px solid black;
-    display: inline-flex;
-    font-size: 30px;
-    align-content: center;
-    justify-content: center;
-    margin: 0 3px;
-    height: 50px;
-    width: 20px;
-
-  }
-
-  .popup-container {
-    background-color: rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    /* display: flex; */
-    display: none;
-  align-items: center;
+.input-container-rätt{
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  }
-    
-  .popup {
-    background: aquamarine;
-    border-radius: 5px;
-    box-shadow: 0 15px 10px 3px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    position: top;
-  }
-.popup button {
-  cursor: pointer;
-  background-color: aliceblue;
-  color: aqua;
-  border: 0;
-  margin-top: 20px;
-  padding: 12px 20px;
+  align-items: center;
+  word-wrap: break-word;
+  gap: 20px;
+  margin-top: 2em;
+}
+
+.btn-primary{
+  padding: 0.2em 0.2em;
+  color: #00539CFF;
+  background-color:#EEA47FFF ;
+  border: none;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+
+.btn-primary:active{
+  background-color: white;
+}
+
+.btn-primary:after{
+background-color: red;
+}
+
+
+
+
+.ord-spotlight{
+  text-align: center;
+  color: white;
+  padding: 1em 1em;
+  font-size: 20px;
+}
+
+
+.reset-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.reset-btn{
+  border: none;
+  padding: 0.2em 0.5em;
+  background-color: #EEA47FFF;
+  color: #00539CFF;
+  border-radius: 5px;
   font-size: 16px;
 }
-.popup button:active {
-  transform:scale(0.98);
-}
-.popup button:focus {
-  outline: 0;
+
+img{
+width: 150px;
 }
 
-.notification-container {
-  background-color: rgba(0, 0, 0, 0.3);
- border-radius: 10px 10px 0 0;
- padding: 15px 20px;
- position: absolute;
- bottom: -50px;
- transition: transform 0.3s ease-in-out;
+.se-poäng-knapp2{
+  margin-top: 1em;
+  margin-left: 1em;
+  display: flex;
+  
 }
