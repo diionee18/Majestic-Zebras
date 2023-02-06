@@ -14,8 +14,23 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: end;
-  margin-right: 15em;
-  padding-top: 3em;
+  margin-right: 8em;
+  padding-top: 1em;
+}
+.se-poäng-knapp {
+	border: none;
+	padding: 0.5em;
+	font-size: 16px;
+	background-color: #EEA47FFF;
+	color: #00539CFF;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 1em;
+	margin-bottom: 0.5em;
+}
+.antal-gissningar{
+  padding-bottom: 2em;
+  font-size: 24px;
 }
 
 
@@ -82,22 +97,7 @@ body{
   color: white;
 }
 
-.se-poäng-knapp {
-	border: none;
-	padding: 1em;
-	font-size: 20px;
-	background-color: #EEA47FFF;
-	color: #00539CFF;
-	font-weight: bold;
-	cursor: pointer;
-	border-radius: 1em;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-.antal-gissningar{
-  padding-bottom: 2em;
-  font-size: 24px;
-}
+
 
 .hr-div{
   border: 1px solid black;
@@ -192,16 +192,12 @@ transition: transform 0.3s ease-in-out;
 .input-container-rätt {
  display: flex;
  flex-direction: row;
+ flex-wrap: wrap ;
  justify-content: center;
   margin: 1em;
   font-size: 24px;
 }
 
-
-.parts{
-  color: white;
-  background-color: white;
-}
 
 
 .upp-efter-klick {
@@ -230,4 +226,70 @@ ul.{
   gap: 1em;
   list-style: none;
   font-size: 30px;
+}
+
+.input-container-rätt{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  word-wrap: break-word;
+  gap: 20px;
+  margin-top: 2em;
+}
+
+.btn-primary{
+  padding: 0.2em 0.2em;
+  color: #00539CFF;
+  background-color:#EEA47FFF ;
+  border: none;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+
+.btn-primary:active{
+  background-color: white;
+}
+
+.btn-primary:after{
+background-color: red;
+}
+
+
+
+
+.ord-spotlight{
+  text-align: center;
+  color: white;
+  padding: 1em 1em;
+  font-size: 20px;
+}
+
+
+.reset-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.reset-btn{
+  border: none;
+  padding: 0.2em 0.5em;
+  background-color: #EEA47FFF;
+  color: #00539CFF;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+img{
+width: 150px;
+}
+
+.se-poäng-knapp2{
+  margin-top: 1em;
+  margin-left: 1em;
+  display: flex;
+  
 }
