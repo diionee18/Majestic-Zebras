@@ -35,8 +35,15 @@ let ordStatus = null;
 
 function randomOrd() {
   svar = wordList[Math.floor(Math.random() * wordList.length)]
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "");
+  ordStatus= ''
+  for (let i= 0; svar.length > i; i++){
+      ordStatus = ' _ ' + ordStatus
+      document.querySelector(".ord-spotlight").innerHTML = ordStatus;
+
+    }
+
 }
 
 
@@ -74,12 +81,28 @@ function generateKnapp() {
     behandlaGuess(e.key.toLocaleLowerCase());
    }
   });
+  
+
+
+
+  
 
 
 function behandlaGuess(valdBokstav) {
-  gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
-  document.getElementById(valdBokstav).setAttribute("disabled", true);
+  
+  if (gissat.includes(valdBokstav)){
+    console.log('behandlaguess2', gissat, valdBokstav)
+    return;
+  }
 
+  gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
+  let bokstavElement = document.getElementById(valdBokstav)
+  if (bokstavElement){
+
+    bokstavElement.setAttribute("disabled", true);
+
+  }
+  
   
 
   if (svar.indexOf(valdBokstav) >= 0) {
@@ -112,6 +135,7 @@ function CheckIfGameLost(){
   if(misstag === maxFel){
     document.querySelector('.input-container-rätt').innerHTML = 'Du har förlorat, spela igen?' 
     börjaOmBtn.style.display= 'block'
+    
   }
 }
 
@@ -126,6 +150,7 @@ function gissatOrd() {
 
 function uppdateraMisstag(){
   document.getElementById('misstag').innerHTML = misstag
+  
 }
 
  
