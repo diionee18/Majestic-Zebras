@@ -35,10 +35,10 @@ function addPlayer(e) {
   name.classList.add(vemSpelar.inputNamn.value)
 
   let guesses = document.createElement('p')
-  guesses.classList.add(.value)
+  guesses.classList.add(gissat.value)
   
-  let Vannellerförlorade = document.createElement('p')
-  Vannellerförlorade.classList.add(.value)
+  /*let Vannellerförlorade = document.createElement('p')
+  Vannellerförlorade.classList.add(.value)*/
 
   div.append(name, guesses, Vannellerförlorade)
 
