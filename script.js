@@ -3,7 +3,6 @@ console.log(wordList);
 
 const poängBtn = document.querySelector(".se-poäng-knapp");
 const andraFönstret = document.querySelector(".visa-efter-start");
-const inputNamn = document.querySelector("#spelarens-namn");
 const spelaBtn = document.querySelector(".börja-spelet-knapp");
 const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector('.reset-btn')
@@ -12,10 +11,52 @@ börjaOmBtn.style.display ='none'
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
+const vemSpelar = {
+    inputNamn: document.querySelector(' .vem-spelar > input')
+    /*gissninar:
+    vannellerförlora:*/
+}
+
+const LS_KEY = 'hänga-gubbe'
+
+
 spelaBtn.addEventListener("click", () => {
-  localStorage.setItem("inputValue", inputNamn.value);
-  randomOrd();
-});
+  localStorage.setItem(LS_KEY, vemSpelar.inputNamn.value);
+  randomOrd(); 
+})
+
+function addPlayer(e) {
+  e.preventDefault();
+
+  let div = document.createElement('div');
+  div.classList.add('poäng-box');
+
+  let name = document.createElement('p');
+  name.classList.add(vemSpelar.inputNamn.value)
+
+  let guesses = document.createElement('p')
+  guesses.classList.add(.value)
+  
+  let Vannellerförlorade = document.createElement('p')
+  Vannellerförlorade.classList.add(.value)
+
+  div.append(name, guesses, Vannellerförlorade)
+
+  name.value = '';
+  guesses.value = '';
+  Vannellerförlorade.value = '';
+}
+
+
+/* Spara namnet i rader
+const sparatNamn = localStorage.getItem(LS_KEY) 
+if( sparatNamn !== '' && sparatNamn !== null) {
+  vemSpelar.inputNamn.value = sparatNamn
+
+  let name = JSON.stringify(sparatNamn)
+  console.log(JSON.stringify(name));
+}
+*/
 
 function toggleSections() {
   if (förstaFönstret.style.display === "block") {
