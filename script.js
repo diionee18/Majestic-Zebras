@@ -70,116 +70,6 @@ function generateKnapp() {
   });
 }
 
-const wordE1 = document.getAnimations('word');
-const wrongLettersE1 = document.getElementById(ul-fel-bokstäver);
-const playAgainBtn = document.getElementById('play-button');
-const popup = document.getElementById('popup-container');
-const notification = document.getElementById('notification-container');
-const finalMessage = document.getElementById('final-message');
-
-const figureParts= document-querySelectorAll('.hela-figuren');
-
-const words = ['application', 'programming', 'interface', 'wizard'];
-
-let selectionWord = words[Math.floor(Math.random()* words.length)];
-const correctbokstäver = [];
-const wrongbokstäver =[];
-
-//Show hidden word
-function displayWord(){
-  wordE1.innerHTML = `
-  ${selectedWord
-    .split('')
-    .map(
-   letter =>
-   <span class="letter">
-   ${correctbokstäver.includes(bokstäver) ? bokstäver : ''}`
-    </span>
-    )
-  .join('')}
-  `;
-
-  const innerWord = wordE1.innerText.replace(/\n/g, '');
-
-  if(innerWord === selectWord){
-    finalMessage.innerText = 'Grattis du vann';
-    popup.style.display='flex';
-  }
-   }
-
-   // wrong letters
-   function updateWrongbokstäverE1(){
-updateWrongbokstäverE1.innerHTML = `
-${wrongbokstäver.length > 0 ? '<p>Wrong</p>' : ''}
-${wrongbokstäver.map(bokstäver => `<span>${bokstäver}</span>`)}
- `;
-
- //display parts
- figureParts.forEach((part,index) => {
-const errors = wrongbokstäver.length;
-
- if(index < errors ) {
-  part.style.display = 'block'
- }
- else{
-  part.style.display='none';
- }
- });
-
-//check if lost
-if(wrongbokstäver.length === hela-figuren.length){
-  finalMessage.innerText='HA SÄMST.';
-  popup.style.display = 'flex';
-}
-//Show notification
-function showNotification(){
-notification.classList.add('show');
-
-setTimeout(()=> {
-  notification.classList.remove('show');
-}, 2000);
-}
-}
-//keydown letter press
-window.addEventListener('keydown', e =>{
-  if(e.keyCode >= 65 && e.keyCode <=90){
-    const bokstäver = e.key;
-
-    if(selectedWord.includes(bokstäver)){
-      if(!correctbokstäver.includes(bokstäver)){
-        correctbokstäver.push(bokstäver);
-        displayWord();
-    } else {
-      showNotification();
-    }
-} else{
-  if(!wrongbokstäver.includes(bokstäver)){
-    wrongbokstäver.push(bokstäver);
-
-    updateWrongbokstäverE1()
-  }else{
-    showNotification
-  }
-}
-  }
-});
-
-//Restart game and play again
-playAgainBtn.addEventListener('click', () => {
-//Emmty arrays
-correctbokstäver.splice(0);
-wrongbokstäver.splice(0);
-
-selectedWord = words[Math.floor(Math.random() * words.length)];
-
-displayWord();
-
-updateWrongbokstäverE1();
-
-popup.style.display= 'none';
-});
-
-displayWord();
 
 
 function behandlaGuess(valdBokstav) {
@@ -241,3 +131,8 @@ document.querySelector(".max-fel").textContent = maxFel;
 generateKnapp();
 gissatOrd();
 
+let button = document.querySelector('button')
+button.addEventListener('click', event => {
+  console.log('Du klickade på knappen')
+  console.log(event)
+} )
