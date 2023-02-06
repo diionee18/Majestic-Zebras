@@ -9,21 +9,6 @@ const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector('.reset-btn')
 
 börjaOmBtn.style.display ='none'
-
-const parts = {
-  partEtt: document.querySelector(".part1"),
-  partTvå: document.querySelector(".part2"),
-  partTre: document.querySelector(".part3"),
-  partFyra: document.querySelector(".part4"),
-  partFem: document.querySelector(".part5"),
-};
-
-// parts.partEtt.style.display = 'none'
-// parts.partTvå.style.display = 'none'
-// parts.partTre.style.display = 'none'
-// parts.partFyra.style.display = 'none'
-// parts.partFem.style.display = 'none'
-
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
@@ -61,7 +46,6 @@ function generateKnapp() {
     button.className = "btn btn-1g btn-primary m-2";
     button.setAttribute("id", bokstav);
     button.innerHTML = bokstav;
-    // <button class="btn btn-1g btn-primary m-2" id="b">b</button>
 
     button.addEventListener("click", (e) => {
       behandlaGuess(e.currentTarget.innerHTML);
@@ -86,6 +70,8 @@ function generateKnapp() {
   });
 }
 
+
+
 function behandlaGuess(valdBokstav) {
   gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
   document.getElementById(valdBokstav).setAttribute("disabled", true);
@@ -102,6 +88,8 @@ function behandlaGuess(valdBokstav) {
     uppdateraFigur();
   }
 }
+
+
 
 function uppdateraFigur(){
   document.getElementById('Hänga-gubbebild').src = './bilder/' + misstag + '.jpg' ;
@@ -136,50 +124,10 @@ function uppdateraMisstag(){
   document.getElementById('misstag').innerHTML = misstag
 }
 
-function reset(){
-  misstag = 0;
-  gissat = [];
-  document.querySelector
-
-}
+ 
 
 document.querySelector(".max-fel").textContent = maxFel;
 
 generateKnapp();
 gissatOrd();
 
-// const secretWord = "Ali";
-// const ul = document.querySelector(".ul-bokstäver-rätt");
-// const mistakes = document.querySelector(".ul-fel-bokstäver");
-// let remainingLetters = secretWord.length;
-
-// for (const letter of secretWord) {
-//   const li = document.createElement("li");
-//   li.textContent = "_";
-//   ul.appendChild(li);
-// }
-
-// document.addEventListener("keypress", (event) => {
-//   const letter = event.key;
-//   let letterFound = false;
-
-//   for (let i = 0; i < secretWord.length; i++) {
-//     if (secretWord[i] === letter) {
-//       const li = ul.children[i];
-//       li.textContent = letter;
-//       letterFound = true;
-//       remainingLetters--;
-
-//     }
-//   }
-
-//   if (!letterFound) {
-//     const mistake = document.createElement("div");
-//     mistake.textContent = letter;
-//     mistakes.appendChild(mistake);
-//   }
-
-//   if (remainingLetters === 0) {
-//     alert("Congratulations! You have won the game.");
-//   }
-// });
