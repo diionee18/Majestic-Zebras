@@ -39,6 +39,8 @@ function randomOrd() {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+
+
 function generateKnapp() {
   "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
 
@@ -46,30 +48,32 @@ function generateKnapp() {
     button.className = "btn btn-1g btn-primary m-2";
     button.setAttribute("id", bokstav);
     button.innerHTML = bokstav;
+    button.style.display = 'none'
+   
 
     button.addEventListener("click", (e) => {
       behandlaGuess(e.currentTarget.innerHTML);
 
     });
-    
-    window.addEventListener("keydown", (e) => {
-      if (!svar) {
-        return;
-      }
-
-      if (e.repeat) {
-        return;
-      }
-      
-      if ("abcdefghijklmnopqrstuvwxyzåäö".includes(e.key.toLocaleLowerCase())) {
-        behandlaGuess(e.key.toLocaleLowerCase());
-      }
-    });
-
+  
     document.querySelector(".input-container-rätt").appendChild(button);
   });
 }
 
+
+  window.addEventListener("keydown", (e) => { 
+    if (!svar) {
+    return;
+    }
+
+    if (e.repeat) {
+    return;
+    }
+  
+   if ("abcdefghijklmnopqrstuvwxyzåäö".includes(e.key.toLocaleLowerCase())) {
+    behandlaGuess(e.key.toLocaleLowerCase());
+   }
+  });
 
 
 function behandlaGuess(valdBokstav) {
