@@ -8,12 +8,12 @@ const spelaBtn = document.querySelector(".börja-spelet-knapp");
 const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector('.reset-btn')
 
+
 börjaOmBtn.style.display ='none'
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
 spelaBtn.addEventListener("click", () => {
-  localStorage.setItem("inputValue", inputNamn.value);
   randomOrd();
 });
 
@@ -48,27 +48,34 @@ function randomOrd() {
 
 
 
-function generateKnapp() {
-  "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
+// function generateKnapp() {
+//   "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
 
-    let button = document.createElement("button");
-    button.className = "btn btn-1g btn-primary m-2";
-    button.setAttribute("id", bokstav);
-    button.innerHTML = bokstav;
-    button.style.display = 'none'
+//     let button = document.createElement("button");
+//     button.className = "btn btn-1g btn-primary m-2";
+//     button.setAttribute("id", bokstav);
+//     button.innerHTML = bokstav;
+//     button.style.display = 'none'
    
 
-    button.addEventListener("click", (e) => {
-      behandlaGuess(e.currentTarget.innerHTML);
+//     button.addEventListener("click", (e) => {
+//       behandlaGuess(e.currentTarget.innerHTML);
 
-    });
+//     });
   
-    document.querySelector(".input-container-rätt").appendChild(button);
-  });
-}
+//     document.querySelector(".input-container-rätt").appendChild(button);
+//   });
+// }
 
 
   window.addEventListener("keydown", (e) => { 
+
+    if (misstag === maxFel ){
+      this.removeEventListener("keydown", false);
+    }else if (ordStatus === svar){
+      this.removeEventListener("keydown", false);
+    }
+    
     if (!svar) {
     return;
     }
@@ -88,12 +95,12 @@ function generateKnapp() {
   
 
 
-function behandlaGuess(valdBokstav) {
-  
+  function behandlaGuess(valdBokstav) {
   if (gissat.includes(valdBokstav)){
     console.log('behandlaguess2', gissat, valdBokstav)
     return;
   }
+
 
   gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
   let bokstavElement = document.getElementById(valdBokstav)
@@ -157,6 +164,12 @@ function uppdateraMisstag(){
 
 document.querySelector(".max-fel").textContent = maxFel;
 
-generateKnapp();
+// generateKnapp();
 gissatOrd();
 
+let incorrectLetters = [];
+
+function displayIncorrectLetters() {
+  let incorrectLettersString = incorrectLetters.join(", ");
+  document.getElementById("incorrect-letters").innerHTML = "Felstavade bokstäver: " + incorrectLettersString;
+}
