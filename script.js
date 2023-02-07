@@ -8,43 +8,14 @@ const inputNamn = document.querySelector('#spelarens-namn')
 const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector('.reset-btn')
 
+
 börjaOmBtn.style.display ='none'
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
-
-/*
-function addPlayer(e) {
-  e.preventDefault();
-
-  let div = document.createElement('div');
-  div.classList.add('poäng-box');
-
-  let name = document.createElement('p');
-  name.classList.add(vemSpelar.inputNamn.value)
-
-  let guesses = document.createElement('p')
-  guesses.classList.add(gissat.value)
-  
-  let Vannellerförlorade = document.createElement('p')
-  Vannellerförlorade.classList.add(.value)
-
-  div.append(name, guesses, Vannellerförlorade)
-
-  name.value = '';
-  guesses.value = '';
-  Vannellerförlorade.value = '';
-
-
-Spara namnet i rader
-const sparatNamn = localStorage.getItem(LS_KEY) 
-if( sparatNamn !== '' && sparatNamn !== null) {
-  vemSpelar.inputNamn.value = sparatNamn
-
-  let name = JSON.stringify(sparatNamn)
-  console.log(JSON.stringify(name));
-}*/
-
+spelaBtn.addEventListener("click", () => {
+  randomOrd();
+});
 
 function toggleSections() {
   if (förstaFönstret.style.display === "block") {
@@ -64,47 +35,81 @@ let ordStatus = null;
 
 function randomOrd() {
   svar = wordList[Math.floor(Math.random() * wordList.length)]
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "");
+  ordStatus= ''
+  for (let i= 0; svar.length > i; i++){
+      ordStatus = ' _ ' + ordStatus
+      document.querySelector(".ord-spotlight").innerHTML = ordStatus;
+
+    }
+
 }
 
-function generateKnapp() {
-  "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
 
-    let button = document.createElement("button");
-    button.className = "btn btn-1g btn-primary m-2";
-    button.setAttribute("id", bokstav);
-    button.innerHTML = bokstav;
 
-    button.addEventListener("click", (e) => {
-      behandlaGuess(e.currentTarget.innerHTML);
+// function generateKnapp() {
+//   "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
 
-    });
+//     let button = document.createElement("button");
+//     button.className = "btn btn-1g btn-primary m-2";
+//     button.setAttribute("id", bokstav);
+//     button.innerHTML = bokstav;
+//     button.style.display = 'none'
+   
+
+//     button.addEventListener("click", (e) => {
+//       behandlaGuess(e.currentTarget.innerHTML);
+
+//     });
+  
+//     document.querySelector(".input-container-rätt").appendChild(button);
+//   });
+// }
+
+
+  window.addEventListener("keydown", (e) => { 
+
+    if (misstag === maxFel ){
+      this.removeEventListener("keydown", false);
+    }else if (ordStatus === svar){
+      this.removeEventListener("keydown", false);
+    }
     
-    window.addEventListener("keydown", (e) => {
-      if (!svar) {
-        return;
-      }
+    if (!svar) {
+    return;
+    }
 
-      if (e.repeat) {
-        return;
-      }
-      
-      if ("abcdefghijklmnopqrstuvwxyzåäö".includes(e.key.toLocaleLowerCase())) {
-        behandlaGuess(e.key.toLocaleLowerCase());
-      }
-    });
-
-    document.querySelector(".input-container-rätt").appendChild(button);
+    if (e.repeat) {
+    return;
+    }
+  
+   if ("abcdefghijklmnopqrstuvwxyzåäö".includes(e.key.toLocaleLowerCase())) {
+    behandlaGuess(e.key.toLocaleLowerCase());
+   }
   });
-}
+  
 
 
 
-function behandlaGuess(valdBokstav) {
+  
+
+
+  function behandlaGuess(valdBokstav) {
+  if (gissat.includes(valdBokstav)){
+    console.log('behandlaguess2', gissat, valdBokstav)
+    return;
+  }
+
+
   gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
-  document.getElementById(valdBokstav).setAttribute("disabled", true);
+  let bokstavElement = document.getElementById(valdBokstav)
+  if (bokstavElement){
 
+    bokstavElement.setAttribute("disabled", true);
+
+  }
+  
   
 
   if (svar.indexOf(valdBokstav) >= 0) {
@@ -139,6 +144,7 @@ function CheckIfGameLost(){
   if(misstag === maxFel){
     document.querySelector('.input-container-rätt').innerHTML = 'Du har förlorat, spela igen?' 
     börjaOmBtn.style.display= 'block'
+    
   }
 }
 
@@ -153,13 +159,14 @@ function gissatOrd() {
 
 function uppdateraMisstag(){
   document.getElementById('misstag').innerHTML = misstag
+  
 }
 
  
 
 document.querySelector(".max-fel").textContent = maxFel;
 
-generateKnapp();
+// generateKnapp();
 gissatOrd();
 
 const LS_KEY = 'hänga-gubbe'
@@ -169,15 +176,8 @@ const data = {name: inputvalue, misstag: }
 
 function playerData () {
   
-
 }
 
-
-spelaBtn.addEventListener("click", () => {
-  localStorage.setItem(LS_KEY, inputNamn.value);
-  randomOrd(); 
-  playerData();
-})
 
 
 localStorage.setItem("playerData", JSON.stringify({
@@ -226,3 +226,9 @@ closeBtn.addEventListener('click', () => {
   overlay.style.display = 'none';
 })
 });
+let incorrectLetters = [];
+
+function displayIncorrectLetters() {
+  let incorrectLettersString = incorrectLetters.join(", ");
+  document.getElementById("incorrect-letters").innerHTML = "Felstavade bokstäver: " + incorrectLettersString;
+}
