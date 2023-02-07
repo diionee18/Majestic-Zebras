@@ -4,6 +4,7 @@ console.log(wordList);
 const poängBtn = document.querySelector(".se-poäng-knapp");
 const andraFönstret = document.querySelector(".visa-efter-start");
 const spelaBtn = document.querySelector(".börja-spelet-knapp");
+const inputNamn = document.querySelector('#spelarens-namn')
 const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector('.reset-btn')
 
@@ -11,20 +12,8 @@ börjaOmBtn.style.display ='none'
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
-const vemSpelar = {
-    inputNamn: document.querySelector(' .vem-spelar > input')
-    /*gissninar:
-    vannellerförlora:*/
-}
 
-const LS_KEY = 'hänga-gubbe'
-
-
-spelaBtn.addEventListener("click", () => {
-  localStorage.setItem(LS_KEY, vemSpelar.inputNamn.value);
-  randomOrd(); 
-})
-
+/*
 function addPlayer(e) {
   e.preventDefault();
 
@@ -37,26 +26,25 @@ function addPlayer(e) {
   let guesses = document.createElement('p')
   guesses.classList.add(gissat.value)
   
-  /*let Vannellerförlorade = document.createElement('p')
-  Vannellerförlorade.classList.add(.value)*/
+  let Vannellerförlorade = document.createElement('p')
+  Vannellerförlorade.classList.add(.value)
 
   div.append(name, guesses, Vannellerförlorade)
 
   name.value = '';
   guesses.value = '';
   Vannellerförlorade.value = '';
-}
 
 
-/* Spara namnet i rader
+Spara namnet i rader
 const sparatNamn = localStorage.getItem(LS_KEY) 
 if( sparatNamn !== '' && sparatNamn !== null) {
   vemSpelar.inputNamn.value = sparatNamn
 
   let name = JSON.stringify(sparatNamn)
   console.log(JSON.stringify(name));
-}
-*/
+}*/
+
 
 function toggleSections() {
   if (förstaFönstret.style.display === "block") {
@@ -124,6 +112,8 @@ function behandlaGuess(valdBokstav) {
     CheckIfGameWon();
   } else if (svar.indexOf(valdBokstav) === -1){
     misstag++;
+    let misstagVärde = misstag.value
+    console.log(misstagVärde)
     uppdateraMisstag();
     CheckIfGameLost();
     uppdateraFigur();
@@ -172,3 +162,48 @@ document.querySelector(".max-fel").textContent = maxFel;
 generateKnapp();
 gissatOrd();
 
+const LS_KEY = 'hänga-gubbe'
+
+const data = {name: inputvalue, misstag: }
+
+
+function playerData () {
+  
+
+}
+
+
+spelaBtn.addEventListener("click", () => {
+  localStorage.setItem(LS_KEY, inputNamn.value);
+  randomOrd(); 
+  playerData();
+})
+
+
+localStorage.setItem("playerData", JSON.stringify({
+  name: inputNamn.value,
+  mistakes: misstag.value,
+}));
+
+const playerData = JSON.parse(localStorage.getItem("playerData"));
+console.log(playerData.name);
+console.log(playerData.mistakes);
+
+
+// Spara inputNamn.value och antal misstag i localStorage
+function saveDataToLocalStorage() {
+  let inputName = document.getElementById("inputNamn").value;
+  let mistakes = 0; // Antalet misstag som spelaren gör
+  
+  // Spara data i localStorage
+  localStorage.setItem("inputName", inputName);
+  localStorage.setItem("mistakes", mistakes);
+}
+
+// Hämta data från localStorage
+function getDataFromLocalStorage() {
+  let inputName = localStorage.getItem("inputName");
+  let mistakes = localStorage.getItem("mistakes");
+  
+  console.log(inputName, mistakes);
+}
