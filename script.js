@@ -13,9 +13,17 @@ börjaOmBtn.style.display ='none'
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
 
+
+
 spelaBtn.addEventListener("click", () => {
+  localStorage.setItem("playerData", JSON.stringify({
+  name: inputNamn.value,
+
+}));
   randomOrd();
 });
+
+
 
 function toggleSections() {
   if (förstaFönstret.style.display === "block") {
@@ -45,27 +53,6 @@ function randomOrd() {
     }
 
 }
-
-
-
-// function generateKnapp() {
-//   "abcdefghijklmnopqrstuvwxyzåäö".split("").forEach((bokstav) => {
-
-//     let button = document.createElement("button");
-//     button.className = "btn btn-1g btn-primary m-2";
-//     button.setAttribute("id", bokstav);
-//     button.innerHTML = bokstav;
-//     button.style.display = 'none'
-   
-
-//     button.addEventListener("click", (e) => {
-//       behandlaGuess(e.currentTarget.innerHTML);
-
-//     });
-  
-//     document.querySelector(".input-container-rätt").appendChild(button);
-//   });
-// }
 
 
   window.addEventListener("keydown", (e) => { 
@@ -162,51 +149,19 @@ function uppdateraMisstag(){
   
 }
 
- 
-
 document.querySelector(".max-fel").textContent = maxFel;
 
 // generateKnapp();
 gissatOrd();
 
-const LS_KEY = 'hänga-gubbe'
+const data = {namn: inputNamn.value, }
 
-const data = {name: inputvalue, misstag: }
-
-
-function playerData () {
+function playerData() {
   
 }
 
 
-
-localStorage.setItem("playerData", JSON.stringify({
-  name: inputNamn.value,
-  mistakes: misstag.value,
-}));
-
-const playerData = JSON.parse(localStorage.getItem("playerData"));
-console.log(playerData.name);
-console.log(playerData.mistakes);
-
-
-// Spara inputNamn.value och antal misstag i localStorage
-function saveDataToLocalStorage() {
-  let inputName = document.getElementById("inputNamn").value;
-  let mistakes = 0; // Antalet misstag som spelaren gör
-  
-  // Spara data i localStorage
-  localStorage.setItem("inputName", inputName);
-  localStorage.setItem("mistakes", mistakes);
-}
-
-// Hämta data från localStorage
-function getDataFromLocalStorage() {
-  let inputName = localStorage.getItem("inputName");
-  let mistakes = localStorage.getItem("mistakes");
-  
-  console.log(inputName, mistakes);
-}
+//Linns kod
 let button = document.querySelector('button')
 button.addEventListener('click', event => {
   console.log('Du klickade på knappen')
@@ -226,9 +181,35 @@ closeBtn.addEventListener('click', () => {
   overlay.style.display = 'none';
 })
 });
+
+//Alis kod 
 let incorrectLetters = [];
 
 function displayIncorrectLetters() {
   let incorrectLettersString = incorrectLetters.join(", ");
   document.getElementById("incorrect-letters").innerHTML = "Felstavade bokstäver: " + incorrectLettersString;
 }
+
+/*  Detta var som AI sa till mig i när jag frågade: 
+Kan du hjälpa mig att skapa en varibel eller en funktion för att spara antal misstag i localstorage.  
+
+SVARET JAG fick: 
+Ja, jag kan hjälpa dig. Här är en enkel exempelkod i JavaScript för att spara antalet misstag i localstorage:
+Denna kod definierar en global variabel mistakes och två funktioner, saveMistakes och loadMistakes. saveMistakes funktionen sparar antalet misstag i localstorage med nyckeln "mistakes", medan loadMistakes funktionen läser antalet misstag från localstorage och tilldelar det till variabeln mistakes.
+
+//SJÄLVA FUNKTIONEN
+function saveMistakes() {
+  localStorage.setItem("misstag", misstag);
+}
+
+function loadMistakes() {
+  misstag = parseInt(localStorage.getItem("misstag")) || 0;
+}
+
+loadMistakes();
+
+// exempel på användning:
+misstag += 1;
+saveMistakes();*/
+
+//Jag kollade och fattar inte hur jag ska få detta att funka. //ANSO
