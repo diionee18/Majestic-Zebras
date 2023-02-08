@@ -17,6 +17,8 @@ andraFönstret.style.display = "none";
 
 spelaBtn.addEventListener("click", () => {
   randomOrd();
+  dispData();
+  // saveResult();
 });
 
 
@@ -51,12 +53,13 @@ function randomOrd() {
 }
 
 
+let gameState = 'playing'
+
+
   window.addEventListener("keydown", (e) => { 
 
-    if (misstag === maxFel ){
-      this.removeEventListener("keydown", false);
-    }else if (ordStatus === svar){
-      this.removeEventListener("keydown", false);
+    if(gameState != 'playing'){
+      return;
     }
     
     if (!svar) {
@@ -100,7 +103,7 @@ function randomOrd() {
     CheckIfGameWon();
   } else if (svar.indexOf(valdBokstav) === -1){
     misstag++;
-    let misstagVärde = misstag.value
+    let misstagVärde = misstag
     console.log(misstagVärde)
     uppdateraMisstag();
     CheckIfGameLost();
@@ -119,6 +122,7 @@ function CheckIfGameWon(){
     börjaOmBtn.style.display= 'block'
     document.querySelector('.input-container-rätt').innerHTML = 'Hurra!! Du vann!'
     document.querySelector('.reset-btn').innerHTML = 'Spela igen';
+    gameState = 'vunnit'
   }
 }
 
@@ -127,6 +131,7 @@ function CheckIfGameLost(){
   if(misstag === maxFel){
     document.querySelector('.input-container-rätt').innerHTML = 'Du har förlorat, spela igen?' 
     börjaOmBtn.style.display= 'block'
+    gameState = 'förlorat'
     
   }
 }
@@ -155,8 +160,6 @@ gissatOrd();
 //Linns kod
 let button = document.querySelector('button')
 button.addEventListener('click', event => {
-  console.log('Du klickade på knappen')
-  console.log(event)
 } )
 
 document,addEventListener('DOMContentLoaded',() => {
@@ -180,4 +183,64 @@ function displayIncorrectLetters() {
   let incorrectLettersString = incorrectLetters.join(", ");
   document.getElementById("incorrect-letters").innerHTML = "Felstavade bokstäver: " + incorrectLettersString;
 }
+// För att lägga till ett nytt resultat:
+// 1. hämta data från localStorage -> lista
+// 2. lägg till nya resultatet sist i listan
+// 3. spara data i localStorage
 
+// function saveResult() {
+//   const resultatet = {
+//     namn:inputNamn.value,
+//     didWin: true,
+//     antalmisstag: misstag,
+//   };
+
+//   const LS_KEY = 'hänga-gubbe-resultat';
+
+//   let data = [];
+//   let stringFromLocalStorage = localStorage.getItem(LS_KEY);
+//   if(stringFromLocalStorage) {
+//     data = JSON.parse(stringFromLocalStorage);
+//   }
+
+//   data.push(saveResult); 
+
+//   let stringToSave = JSON.stringify(data);
+//   localStorage.setItem(LS_KEY,stringToSave);
+// }
+
+// const saveButton = document.getElementById('save-button');
+// saveButton.addEventListener('click', saveResult);
+
+
+// Alis local-storage-kod
+
+const skapaNamn = e =>{
+  let formData = JSON.parse(localStorage.getItem('formdata')) || [];
+  formData.push({
+    namn:  document.querySelector('#spelarens-namn').value,
+    antalMisstag: document.getElementById('misstag').value
+  });
+  localStorage.setItem('formData_' + Date.now(), JSON.stringify(formData));
+
+  dispData();
+  e.preventDefault();
+}
+function dispData(){
+  console.log(localStorage.getItem('formData'));
+  if(localStorage.getItem('formData')){
+    let outpPut = document.getElementById('ul-poänglista');
+ 
+    JSON.parse(localStorage.getItem('formData')).forEach(data => {
+   
+        
+     
+    });
+  }
+}
+
+const skapaNamnButton = document.querySelector("#skapa-namn-knapp");
+skapaNamnButton.addEventListener("click", skapaNamn);
+
+
+  

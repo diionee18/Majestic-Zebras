@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button class="btn" id="openOverlay"> Se Poäng </button>
+  <button class="se-poäng-knapp" id="openOverlay"> Se Poäng </button>
   <section>
     
     
@@ -29,7 +29,7 @@
       <div class="vem-spelar"> 
         <label for="spelarens-namn">Vem är det som spelar?</label>
         <input id="spelarens-namn" class="spelarens-namn" type="text" placeholder="Skriv in ditt namn"> 
-        <button class="börja-spelet-knapp">Börja spela</button>
+        <button class="börja-spelet-knapp" id="skapa-namn-knapp">Börja spela</button>
       </div>
       
       <h3>Du ska gissa vad ordet är och du har 6 försök på dig. </h3>
@@ -53,11 +53,11 @@
     </div>
     
     <div class="reset-div">
-    <button class="reset-btn" type="button" onClick="window.location.reload();">Börja om</button>
+      <button class="reset-btn" type="button" onClick="window.location.reload();">Börja om</button>
     </div>
     <p class="ord-spotlight">Ordet som ska gissas ska vara här</p>
     
-    <p class="fel-bokstäver">a</p>
+    <p class="fel-bokstäver"></p>
     <div class="input-container-fel">
       <ul class="ul-fel-bokstäver">
       </ul>
@@ -70,9 +70,11 @@
 <div class="overlay">
   <div class="info">
   <div class="close" id="closeOverlay">&times;</div>
-  <h2>Här kan du se dina poäng</h2>
-  <p>1-2</p>
-  <button class="btn">Hello</button>
+  <ul id="ul-poänglista">
+    <h2>Resultat Tabell</h2>
+    
+  </ul>
+  <button class="reset-btn reset-btntabell" type="button" onClick="window.location.reload();">Börja om</button>
   </div>
 
 </body>

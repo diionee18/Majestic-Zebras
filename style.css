@@ -286,20 +286,21 @@ background-color: red;
 }
 
 
-.reset-btn{
+.reset-btn, .se-poäng-knapp{
   border: none;
   padding: 0.2em 0.5em;
   background-color: #EEA47FFF;
   color: #00539CFF;
   border-radius: 5px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 img{
 width: 150px;
 }
 
-.se-poäng-knapp2{
+.se-poäng-knapp{
   margin-top: 1em;
   margin-left: 1em;
   display: flex;
@@ -354,7 +355,7 @@ width: 150px;
   transform: scale(3) rotate(360deg);
 }
 
-.btn{
+.reset-btntabell{
   background-color:#00539CFF;
   color: #ffffff;
   padding: 10px;
@@ -362,10 +363,14 @@ width: 150px;
   border-radius: 5px;
   box-shadow: -2px 3px 4px rgba(0,0,0,0.5);
   cursor: pointer;
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.btn:hover{
+.reset-btntabell{
+  margin-top: 1em;
+}
+
+.reset-btntabell:hover{
   background-color: #EEA47FFF;
 }
 
@@ -376,4 +381,33 @@ width: 150px;
   100%{
     opacity: 1;
   }
+}
+
+
+#ul-poänglista{
+  border: 2px solid #EEA47FFF ;
+  padding: 3em;
+}
+
+#ul-poänglista >h2{
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+
+#ul-poänglista > li{
+  display: block;
+  border: 2px solid #EEA47FFF ;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 2em;
+  text-align: start;
+  margin-bottom: 0.3em;
+}
+
+#resultat-span{
+  border-left: 2px solid #EEA47FFF;
+  padding-left: 2em;
+  text-align: center;
 }
