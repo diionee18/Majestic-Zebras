@@ -17,7 +17,9 @@ andraFönstret.style.display = "none";
 
 spelaBtn.addEventListener("click", () => {
   randomOrd();
-  dispData();
+  saveData();
+  // result();
+  // dispData();
   // saveResult();
 });
 
@@ -123,8 +125,21 @@ function CheckIfGameWon(){
     document.querySelector('.input-container-rätt').innerHTML = 'Hurra!! Du vann!'
     document.querySelector('.reset-btn').innerHTML = 'Spela igen';
     gameState = 'vunnit'
+    
+    // 1.Hämta den gammla datan (funktionen olddata)
+    // 2. Skapa ett objekt som beskriver resultatet (objekt)
+    // 3. Lägg till objektet i gammla datan.
+    // 4. ta den nya arrayen och pusha tillbaka till local-storage
+    // 5. Uppdatera hela score-vyn (rendera score-vyn)
+
+    //Det som ska finnas i resultat-objektet är Spelarens namn, antal gissningar och om man vann eller förlorade.
+    // { namn, antalGissningar, vinstFörlust}
+
+
   }
 }
+
+
 
 
 function CheckIfGameLost(){
@@ -188,59 +203,71 @@ function displayIncorrectLetters() {
 // 2. lägg till nya resultatet sist i listan
 // 3. spara data i localStorage
 
-// function saveResult() {
-//   const resultatet = {
-//     namn:inputNamn.value,
-//     didWin: true,
-//     antalmisstag: misstag,
-//   };
-
-//   const LS_KEY = 'hänga-gubbe-resultat';
-
-//   let data = [];
-//   let stringFromLocalStorage = localStorage.getItem(LS_KEY);
-//   if(stringFromLocalStorage) {
-//     data = JSON.parse(stringFromLocalStorage);
-//   }
-
-//   data.push(saveResult); 
-
-//   let stringToSave = JSON.stringify(data);
-//   localStorage.setItem(LS_KEY,stringToSave);
-// }
-
-// const saveButton = document.getElementById('save-button');
-// saveButton.addEventListener('click', saveResult);
-
 
 // Alis local-storage-kod
 
-const skapaNamn = e =>{
-  let formData = JSON.parse(localStorage.getItem('formdata')) || [];
-  formData.push({
-    namn:  document.querySelector('#spelarens-namn').value,
-    antalMisstag: document.getElementById('misstag').value
-  });
-  localStorage.setItem('formData_' + Date.now(), JSON.stringify(formData));
+// const skapaNamn = e =>{
+//   let formData = JSON.parse(localStorage.getItem('formdata')) || [];
+//   formData.push({
+//     namn:  document.querySelector('#spelarens-namn').value,
+//     antalMisstag: document.getElementById('misstag').value
+//   });
+//   localStorage.setItem('formData_' + Date.now(), JSON.stringify(formData));
 
-  dispData();
-  e.preventDefault();
+//   dispData();
+//   e.preventDefault();
+// }
+// function dispData(){
+//   console.log(localStorage.getItem('formData'));
+//   if(localStorage.getItem('formData')){
+//     let outpPut = document.getElementById('ul-poänglista');
+//     JSON.parse(localStorage.getItem('formData')).forEach(data => {
+//       let li = document.createElement('li');
+//       let textNode = document.createTextNode(data.namn + ": " + data.antalMisstag + " misstag");
+//       li.appendChild(textNode);
+//       outpPut.appendChild(li);
+//     });
+//   }
+// }
+
+
+// const skapaNamnButton = document.querySelector("#skapa-namn-knapp");
+// skapaNamnButton.addEventListener("click", skapaNamn);
+
+
+
+
+//Ann-Sophie local kod
+
+function saveData() {
+  //get data från input box
+  let newData = inputNamn.value; 
+
+  //if there is nothing saved at the start then save a empty array
+  if(localStorage.getItem('data') == null) {
+    localStorage.setItem('data', '[]'); 
+  }
+
+  //get old data and stop it to the new data
+  const oldData = JSON.parse(localStorage.getItem('data'));
+  oldData.push(newData); 
+  
+
+  //save the old data + new data to local storage 
+  localStorage.setItem('data',JSON.stringify(oldData));
 }
-function dispData(){
-  console.log(localStorage.getItem('formData'));
-  if(localStorage.getItem('formData')){
-    let outpPut = document.getElementById('ul-poänglista');
- 
-    JSON.parse(localStorage.getItem('formData')).forEach(data => {
-   
-        
-     
-    });
+
+
+function result(){
+  if(localStorage.getItem('data' != null)) {
+    document.querySelector('#ul-poänglista').innerHTML = JSON.parse(localStorage.getItem('data'));
   }
 }
 
-const skapaNamnButton = document.querySelector("#skapa-namn-knapp");
-skapaNamnButton.addEventListener("click", skapaNamn);
+const poängLista = document.querySelector('#ul-poänglista')
+let item = document.createElement('li')
+  item.innerText = 'Namn: ',
+
+poängLista.append(item);
 
 
-  
