@@ -16,10 +16,6 @@ andraFönstret.style.display = "none";
 
 
 spelaBtn.addEventListener("click", () => {
-  localStorage.setItem("playerData", JSON.stringify({
-  name: inputNamn.value,
-
-}));
   randomOrd();
 });
 
@@ -154,11 +150,6 @@ document.querySelector(".max-fel").textContent = maxFel;
 // generateKnapp();
 gissatOrd();
 
-const data = {namn: inputNamn.value, }
-
-function playerData() {
-  
-}
 
 
 //Linns kod
@@ -190,26 +181,3 @@ function displayIncorrectLetters() {
   document.getElementById("incorrect-letters").innerHTML = "Felstavade bokstäver: " + incorrectLettersString;
 }
 
-/*  Detta var som AI sa till mig i när jag frågade: 
-Kan du hjälpa mig att skapa en varibel eller en funktion för att spara antal misstag i localstorage.  
-
-SVARET JAG fick: 
-Ja, jag kan hjälpa dig. Här är en enkel exempelkod i JavaScript för att spara antalet misstag i localstorage:
-Denna kod definierar en global variabel mistakes och två funktioner, saveMistakes och loadMistakes. saveMistakes funktionen sparar antalet misstag i localstorage med nyckeln "mistakes", medan loadMistakes funktionen läser antalet misstag från localstorage och tilldelar det till variabeln mistakes.
-
-//SJÄLVA FUNKTIONEN
-function saveMistakes() {
-  localStorage.setItem("misstag", misstag);
-}
-
-function loadMistakes() {
-  misstag = parseInt(localStorage.getItem("misstag")) || 0;
-}
-
-loadMistakes();
-
-// exempel på användning:
-misstag += 1;
-saveMistakes();*/
-
-//Jag kollade och fattar inte hur jag ska få detta att funka. //ANSO
