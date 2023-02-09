@@ -1,6 +1,12 @@
 import wordList from "./word-list.json" assert { type: "json" };
 console.log(wordList);
 
+import{
+  CheckIfGameLost,
+  CheckIfGameWon,
+  sparaResultat
+}from './modules'
+
 const poängBtn = document.querySelector(".se-poäng-knapp");
 const andraFönstret = document.querySelector(".visa-efter-start");
 const spelaBtn = document.querySelector(".börja-spelet-knapp");
@@ -92,12 +98,6 @@ function behandlaGuess(valdBokstav) {
 }
 
 
-function sparaResultat(won) {
-  const resultat = {
-    name: inputNamn.value,
-    misstag: misstag,
-    won: won
-  }
 
   let score = localStorage.getItem("score");
   if (score === null) {
@@ -108,36 +108,14 @@ function sparaResultat(won) {
     localStorage.setItem('score', JSON.stringify(score))
   }
 
-}
+
 
 function uppdateraFigur() {
   document.getElementById("Hänga-gubbebild").src =
     "./bilder/" + misstag + ".jpg";
 }
 
-function CheckIfGameWon() {
-  if (ordStatus === svar) {
-    börjaOmBtn.style.display = "block";
-    document.querySelector(".input-container-rätt").innerHTML =
-      "Hurra!! Du vann!";
-    document.querySelector(".reset-btn").innerHTML = "Spela igen";
-    gameState = "vunnit";
-    sparaResultat(true)
-    
-  }
-}
 
-function CheckIfGameLost() {
-  if (misstag === maxFel) {
-    document.querySelector(".input-container-rätt").innerHTML =
-      `Du har förlorat och det rätta ordet var: <br> "${svar}"`
-    börjaOmBtn.style.display = "block";
-    gameState = "förlorat";
-
-    sparaResultat(false)
-    
-  }
-}
 
 function gissatOrd() {
   ordStatus = svar
