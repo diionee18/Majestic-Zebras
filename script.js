@@ -1,12 +1,6 @@
 import wordList from "./word-list.json" assert { type: "json" };
 console.log(wordList);
 
-import{
-  CheckIfGameLost,
-  CheckIfGameWon,
-  sparaResultat
-}from './modules'
-
 const poängBtn = document.querySelector(".se-poäng-knapp");
 const andraFönstret = document.querySelector(".visa-efter-start");
 const spelaBtn = document.querySelector(".börja-spelet-knapp");
@@ -40,6 +34,7 @@ let ordStatus = null;
 
 function randomOrd() {
   svar = wordList[Math.floor(Math.random() * wordList.length)]
+  console.log(svar)
   ordStatus = "";
   for (let i = 0; svar.length > i; i++) {
     ordStatus = " _ " + ordStatus;
@@ -98,6 +93,12 @@ function behandlaGuess(valdBokstav) {
 }
 
 
+function sparaResultat(won) {
+  const resultat = {
+    name: inputNamn.value,
+    misstag: misstag,
+    won: won
+  }
 
   let score = localStorage.getItem("score");
   if (score === null) {
@@ -108,14 +109,36 @@ function behandlaGuess(valdBokstav) {
     localStorage.setItem('score', JSON.stringify(score))
   }
 
-
+}
 
 function uppdateraFigur() {
   document.getElementById("Hänga-gubbebild").src =
     "./bilder/" + misstag + ".jpg";
 }
 
+function CheckIfGameWon() {
+  if (ordStatus === svar) {
+    börjaOmBtn.style.display = "block";
+    document.querySelector(".input-container-rätt").innerHTML =
+      "Hurra!! Du vann!";
+    document.querySelector(".reset-btn").innerHTML = "Spela igen";
+    gameState = "vunnit";
+    sparaResultat(true)
+    
+  }
+}
 
+function CheckIfGameLost() {
+  if (misstag === maxFel) {
+    document.querySelector(".input-container-rätt").innerHTML =
+      `Du har förlorat och det rätta ordet var: <br> "${svar}"`
+    börjaOmBtn.style.display = "block";
+    gameState = "förlorat";
+
+    sparaResultat(false)
+    
+  }
+}
 
 function gissatOrd() {
   ordStatus = svar
@@ -164,14 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     score = JSON.parse(score);
     if (isSortByDate) {
-      score = score.sort((p1, p2) => {
-        return new Date(p2.date) - new Date(p1.date);
-      });
+      console.log(isSortByDate)
+      score = score.reverse();
     } else {
-      score = score.sort((p1, p2) => {
-        return p2.score - p1.score;
-      });
-  
       score = score.sort((p1, p2) => {
         return p1.misstag - p2.misstag;
       });
