@@ -34,8 +34,6 @@ let ordStatus = null;
 
 function randomOrd() {
   svar = wordList[Math.floor(Math.random() * wordList.length)]
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
   ordStatus = "";
   for (let i = 0; svar.length > i; i++) {
     ordStatus = " _ " + ordStatus;
@@ -64,6 +62,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 // Hantera inmatning.
+
 function behandlaGuess(valdBokstav) {
   let redanGissadPå = false;
   if (gissat.indexOf(valdBokstav) === -1) {
@@ -83,13 +82,15 @@ function behandlaGuess(valdBokstav) {
   } else if (svar.indexOf(valdBokstav) === -1 && !redanGissadPå) {
     misstag++;
     let misstagVärde = misstag;
-    console.log(misstagVärde);
+    
     uppdateraMisstag();
     CheckIfGameLost();
     uppdateraFigur();
+    let felBokstäver = document.querySelector(".fel-bokstäver");
+    felBokstäver.innerHTML += ` ${valdBokstav} `;
   }
-
 }
+
 
 function sparaResultat(won) {
   const resultat = {
@@ -216,60 +217,3 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.style.display = "none";
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const openBtn = document.querySelector("#openOverlay");
-//   const closeBtn = document.querySelector("#closeOverlay");
-//   const overlay = document.querySelector(".overlay");
-
-//   openBtn.addEventListener("click", () => {
-//     overlay.style.display = "block";
-
-//     let score = localStorage.getItem("score");
-//     if (!score) {
-//       return;
-//     }
-
-//     score = JSON.parse(score);
-//     score = score.sort((p1, p2) => {
-//       return p2.score - p1.score;
-//     });
-
-//     score = score.sort((p1, p2) => {
-//       return p1.misstag - p2.misstag;
-//     });
-//     const parent = document.getElementById("ul-poänglista");
-//     Array.from(parent.getElementsByTagName('li')).forEach(el => {
-//      el.remove();
-//     });
-
-
-//     score.forEach((player) => {
-//       let li = document.createElement("li");
-//       let wonText = player.won ? "Vann" : "Förlorade";
-//       li.innerHTML = `<p>Spelare: ${player.name}</p> <p>Antal fel: ${player.misstag}</p> <p>${wonText}</p>`;
-//       li.className = 'li-lista'
-//       parent.appendChild(li);
-//     });
-//   });
-
-//   closeBtn.addEventListener("click", () => {
-//     overlay.style.display = "none";
-//   });
-// });
-
-
-
-

@@ -377,6 +377,14 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.fel-bokstäver{
+  padding: 2em 0;
+  margin-left: 70px;
+  margin-right: 70px;
+  border-top: 1px solid #EEA47FFF;
+  text-align: center;
+}
+
 @media (max-width: 754px) {
  #ul-poänglista{
 padding: 0em em;
