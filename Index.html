@@ -27,8 +27,8 @@
       <h1>Välkommen till Hänga-gubbe</h1>
       
       <div class="vem-spelar"> 
-        <label for="spelarens-namn">Vem är det som spelar?</label>
-        <input id="spelarens-namn" class="spelarens-namn" type="text" placeholder="Skriv in ditt namn"> 
+        <label for="spelarens-namn">Skriv in ditt spelnamn</label>
+        <input id="spelarens-namn" class="spelarens-namn" type="text" placeholder="T.ex. ABC" maxlength="3"> 
         <button class="börja-spelet-knapp" id="skapa-namn-knapp">Börja spela</button>
       </div>
       
@@ -70,8 +70,15 @@
 <div class="overlay">
   <div class="info">
   <div class="close" id="closeOverlay">&times;</div>
+
+  
   <ul id="ul-poänglista">
-    <h2>Resultat Tabell</h2>
+    <h2>Resultat</h2>
+    Poäng / Senast <br>
+<label for="switchOrder" class="switch">
+<input type="checkbox" id="switchOrder">
+<span class="slider"></span>
+</label> <br>
     
   </ul>
   <button class="reset-btn reset-btntabell" type="button" onClick="window.location.reload();">Börja om</button>

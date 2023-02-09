@@ -65,16 +65,22 @@ window.addEventListener("keydown", (e) => {
 
 // Hantera inmatning.
 function behandlaGuess(valdBokstav) {
-  gissat.indexOf(valdBokstav) === -1 ? gissat.push(valdBokstav) : null;
+  let redanGissadPå = false;
+  if (gissat.indexOf(valdBokstav) === -1) {
+    gissat.push(valdBokstav)
+  } else {
+    redanGissadPå = true;
+  }
+
   let bokstavElement = document.getElementById(valdBokstav);
   if (bokstavElement) {
     bokstavElement.setAttribute("disabled", true);
   }
 
-  if (svar.indexOf(valdBokstav) >= 0) {
+  if (svar.indexOf(valdBokstav) >= 0 && !redanGissadPå) {
     gissatOrd();
     CheckIfGameWon();
-  } else if (svar.indexOf(valdBokstav) === -1) {
+  } else if (svar.indexOf(valdBokstav) === -1 && !redanGissadPå) {
     misstag++;
     let misstagVärde = misstag;
     console.log(misstagVärde);
@@ -116,17 +122,19 @@ function CheckIfGameWon() {
     document.querySelector(".reset-btn").innerHTML = "Spela igen";
     gameState = "vunnit";
     sparaResultat(true)
+    
   }
 }
 
 function CheckIfGameLost() {
   if (misstag === maxFel) {
     document.querySelector(".input-container-rätt").innerHTML =
-      "Du har förlorat, spela igen?";
+      `Du har förlorat och det rätta ordet var: <br> "${svar}"`
     börjaOmBtn.style.display = "block";
     gameState = "förlorat";
 
     sparaResultat(false)
+    
   }
 }
 
@@ -153,6 +161,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.querySelector("#openOverlay");
   const closeBtn = document.querySelector("#closeOverlay");
   const overlay = document.querySelector(".overlay");
+  const switchBtn = document.querySelector("#switchOrder");
+
+  let isSortByDate = false;
+  
+  switchBtn.addEventListener("click", () => {
+    isSortByDate = !isSortByDate;
+    if (isSortByDate) {
+      switchBtn.innerHTML = "Sortera efter poäng";
+    } else {
+      switchBtn.innerHTML = "Sortera efter datum";
+    }
+    openBtn.click();
+  });
 
   openBtn.addEventListener("click", () => {
     overlay.style.display = "block";
@@ -163,18 +184,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     score = JSON.parse(score);
-    score = score.sort((p1, p2) => {
-      return p2.score - p1.score;
-    });
+    if (isSortByDate) {
+      score = score.sort((p1, p2) => {
+        return new Date(p2.date) - new Date(p1.date);
+      });
+    } else {
+      score = score.sort((p1, p2) => {
+        return p2.score - p1.score;
+      });
+  
+      score = score.sort((p1, p2) => {
+        return p1.misstag - p2.misstag;
+      });
+    }
 
     const parent = document.getElementById("ul-poänglista");
     Array.from(parent.getElementsByTagName('li')).forEach(el => {
       el.remove();
-    })
+    });
 
     score.forEach((player) => {
       let li = document.createElement("li");
-      li.innerText = `Spelare: ${player.name}. Antal fel: ${player.misstag}. Vann? ${player.won}`;
+      let wonText = player.won ? "Vann" : "Förlorade";
+      li.innerHTML = `<p>Spelare: ${player.name}</p> <p>Antal fel: ${player.misstag}</p> <p>${wonText}</p>`;
       li.className = 'li-lista'
       parent.appendChild(li);
     });
@@ -184,6 +216,59 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.style.display = "none";
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   const openBtn = document.querySelector("#openOverlay");
+//   const closeBtn = document.querySelector("#closeOverlay");
+//   const overlay = document.querySelector(".overlay");
+
+//   openBtn.addEventListener("click", () => {
+//     overlay.style.display = "block";
+
+//     let score = localStorage.getItem("score");
+//     if (!score) {
+//       return;
+//     }
+
+//     score = JSON.parse(score);
+//     score = score.sort((p1, p2) => {
+//       return p2.score - p1.score;
+//     });
+
+//     score = score.sort((p1, p2) => {
+//       return p1.misstag - p2.misstag;
+//     });
+//     const parent = document.getElementById("ul-poänglista");
+//     Array.from(parent.getElementsByTagName('li')).forEach(el => {
+//      el.remove();
+//     });
+
+
+//     score.forEach((player) => {
+//       let li = document.createElement("li");
+//       let wonText = player.won ? "Vann" : "Förlorade";
+//       li.innerHTML = `<p>Spelare: ${player.name}</p> <p>Antal fel: ${player.misstag}</p> <p>${wonText}</p>`;
+//       li.className = 'li-lista'
+//       parent.appendChild(li);
+//     });
+//   });
+
+//   closeBtn.addEventListener("click", () => {
+//     overlay.style.display = "none";
+//   });
+// });
 
 
 
