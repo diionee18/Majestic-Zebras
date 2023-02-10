@@ -8,6 +8,7 @@ const inputNamn = document.querySelector("#spelarens-namn");
 const förstaFönstret = document.querySelector(".upp-efter-klick");
 const börjaOmBtn = document.querySelector(".reset-btn");
 
+// Här döljer vi andra sidan, för att kunna anropa den vid ett klick event.
 börjaOmBtn.style.display = "none";
 förstaFönstret.style.display = "";
 andraFönstret.style.display = "none";
@@ -26,12 +27,14 @@ function toggleSections() {
 }
 spelaBtn.addEventListener("click", toggleSections);
 
+// våra spel-regler för att spelet ska kunna köras.
 const maxFel = 6;
 let svar = "";
 let misstag = 0;
 let gissat = [];
 let ordStatus = null;
 
+// Här genereras orden som man ska gissa från ordlistan
 function randomOrd() {
   svar = wordList[Math.floor(Math.random() * wordList.length)]
   console.log(svar)
@@ -42,8 +45,10 @@ function randomOrd() {
   }
 }
 
+// Här känner spelet igen ifall du spelar eller inte
 let gameState = "playing";
 
+// Här triggas tangentbordet igång vi klick av bokstäver
 window.addEventListener("keydown", (e) => {
   if (gameState != "playing") {
     return;
@@ -62,8 +67,7 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-// Hantera inmatning.
-
+// Här hanteras dem valda bokstäverna och vad som ska hända i spelet.
 function behandlaGuess(valdBokstav) {
   let redanGissadPå = false;
   if (gissat.indexOf(valdBokstav) === -1) {
@@ -82,8 +86,7 @@ function behandlaGuess(valdBokstav) {
     CheckIfGameWon();
   } else if (svar.indexOf(valdBokstav) === -1 && !redanGissadPå) {
     misstag++;
-    let misstagVärde = misstag;
-    
+       
     uppdateraMisstag();
     CheckIfGameLost();
     uppdateraFigur();
@@ -92,7 +95,39 @@ function behandlaGuess(valdBokstav) {
   }
 }
 
+// Här uppdaterar vi figuren vid val av fel bokstav.
+function uppdateraFigur() {
+  document.getElementById("Hänga-gubbebild").src =
+    "./bilder/" + misstag + ".jpg";
+}
 
+// Här kontrollerar vi ifall en spelare har vunnit eller förlorat.
+function CheckIfGameWon() {
+  if (ordStatus === svar) {
+    börjaOmBtn.style.display = "block";
+    document.querySelector(".input-container-rätt").innerHTML =
+      "Hurra!! Du vann!";
+    document.querySelector(".reset-btn").innerHTML = "Spela igen";
+    gameState = "vunnit";
+    sparaResultat(true)
+    
+  }
+}
+function CheckIfGameLost() {
+  if (misstag === maxFel) {
+    document.querySelector(".input-container-rätt").innerHTML =
+      `Du har förlorat och det rätta ordet var: <br> "${svar}"`
+    börjaOmBtn.style.display = "block";
+    gameState = "förlorat";
+
+    sparaResultat(false)
+    
+  }
+}
+
+
+
+//Här hämtar vi resultat och sparar det i local-storage
 function sparaResultat(won) {
   const resultat = {
     name: inputNamn.value,
@@ -111,35 +146,7 @@ function sparaResultat(won) {
 
 }
 
-function uppdateraFigur() {
-  document.getElementById("Hänga-gubbebild").src =
-    "./bilder/" + misstag + ".jpg";
-}
-
-function CheckIfGameWon() {
-  if (ordStatus === svar) {
-    börjaOmBtn.style.display = "block";
-    document.querySelector(".input-container-rätt").innerHTML =
-      "Hurra!! Du vann!";
-    document.querySelector(".reset-btn").innerHTML = "Spela igen";
-    gameState = "vunnit";
-    sparaResultat(true)
-    
-  }
-}
-
-function CheckIfGameLost() {
-  if (misstag === maxFel) {
-    document.querySelector(".input-container-rätt").innerHTML =
-      `Du har förlorat och det rätta ordet var: <br> "${svar}"`
-    börjaOmBtn.style.display = "block";
-    gameState = "förlorat";
-
-    sparaResultat(false)
-    
-  }
-}
-
+// Här är det som skriver ut dem rätta bokstäverna.
 function gissatOrd() {
   ordStatus = svar
     .split("")
@@ -148,17 +155,15 @@ function gissatOrd() {
   document.querySelector(".ord-spotlight").innerHTML = ordStatus;
 }
 
+// Här Uppdaterar vi antal misstag
 function uppdateraMisstag() {
   document.getElementById("misstag").innerHTML = misstag;
 }
-
 document.querySelector(".max-fel").textContent = maxFel;
 
-// generateKnapp();
-gissatOrd();
 
-//Linns kod
-
+//Här har vi overlay tillsammans med local-storage.
+// Skapas även li-listor för poängvyn.
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.querySelector("#openOverlay");
   const closeBtn = document.querySelector("#closeOverlay");
@@ -187,8 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     score = JSON.parse(score);
     if (isSortByDate) {
-      console.log(isSortByDate)
-      score = score.reverse();
+           score = score.reverse();
     } else {
       score = score.sort((p1, p2) => {
         return p1.misstag - p2.misstag;
