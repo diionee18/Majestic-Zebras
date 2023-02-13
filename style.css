@@ -41,7 +41,7 @@ body{
   transition: opacity .5s;
 }
 .antal-gissningar{
-  padding-bottom: 2em;
+  margin-top: 1em;
   font-size: 24px;
 }
 
@@ -106,17 +106,7 @@ body{
 }
 
 .visa-efter-start{
-  /* visibility: hidden; */
   color: white;
-}
-
-
-
-.hr-div{
-  border: 1px solid black;
-  
-  
-
 }
 
 .input-container-fel {
@@ -161,7 +151,7 @@ body{
   text-align: center;
   color: white;
   padding: 1em 1em;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 
@@ -174,11 +164,11 @@ body{
 
 .reset-btn, .se-poäng-knapp{
   border: none;
-  padding: 0.2em 0.5em;
+  padding: 0.5em 0.5em;
   background-color: #EEA47FFF;
   color: #00539CFF;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   border: 1px solid #00539CFF;
 }
@@ -192,7 +182,7 @@ body{
 
 
 img{
-width: 150px;
+width: 250px;
 }
 
 .se-poäng-knapp{
@@ -267,6 +257,31 @@ width: 150px;
 .reset-btntabell:hover{
   background-color: #EEA47FFF;
 }
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #00539CFF; 
+  border-radius: 10px;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: #EEA47FFF; 
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00539CFF; 
+}
+
+
+
 
 @keyframes channelInfo{
   0%{opacity: 0;
@@ -379,14 +394,28 @@ input:checked + .slider:before {
 }
 
 .fel-bokstäver{
-  padding: 2em 0;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 2em;
+  }
+
+.fel-bokstäver-rubrik{
+  padding: 1em 0;
   margin-left: 70px;
   margin-right: 70px;
   border-top: 1px solid #EEA47FFF;
   text-align: center;
+  font-size: 23px;
 }
 
+
 @media (max-width: 754px) {
+
+  img{
+    width: 200px;
+    }
+    
+
  #ul-poänglista{
 padding: 0em em;
 
